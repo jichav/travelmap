@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Travelmap</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230e8b7e'/%3E%3Cpath d='M16 26s8-8.6 8-14a8 8 0 0 0-16 0c0 5.4 8 14 8 14Z' fill='none' stroke='white' stroke-width='2.4' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='11.6' r='2.7' fill='white'/%3E%3C/svg%3E">
-<meta name="description" content="Travelmap — the personal travel map of Václav Jícha.">
+<meta name="description" content="Travelmap – the personal travel map of Václav Jícha.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@
 <script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
 <script src="assets/config.js"></script>
 <script src="assets/countries.js"></script>
+<script src="assets/i18n.js"></script>
 </head>
 <body>
 
@@ -33,14 +34,18 @@
       <span class="chip" id="mode">Reading</span>
       <button id="unlockBtn">Sign in</button>
       <button id="saveBtn" class="primary" hidden>Save</button>
+      <div class="langs" role="group" aria-label="Language">
+        <button class="lang" id="langEn" data-lang="en" aria-label="English" title="English"><img src="https://flagcdn.com/gb.svg" alt=""></button>
+        <button class="lang" id="langCs" data-lang="cs" aria-label="Čeština" title="Čeština"><img src="https://flagcdn.com/cz.svg" alt=""></button>
+      </div>
     </div>
    </div>
   </header>
 
   <section class="intro">
-    <h1>Every country I have set foot in.</h1>
-    <p>195 countries and just over 250 places once territories are counted. Continents stay
-      closed until the first one there is marked as visited.</p>
+    <h1 data-i18n="h1">Every country I have set foot in</h1>
+    <p data-i18n="intro">195 countries and over 250 destinations once territories are counted. Continents remain
+      locked until the first one is marked as visited.</p>
   </section>
 
   <section class="stats">
@@ -50,12 +55,12 @@
       <div class="bar-l"><span id="pctBar" style="width:0%"></span></div>
     </div>
     <div class="stat">
-      <div class="k">Countries</div>
+      <div class="k" data-i18n="countries">Countries</div>
       <div class="v" id="cnt">0<small> / 0</small></div>
       <div class="bar-l"><span id="cntBar" style="width:0%"></span></div>
     </div>
     <div class="stat">
-      <div class="k">Capitals</div>
+      <div class="k" data-i18n="capitals">Capitals</div>
       <div class="v" id="caps">0<small> / 0</small></div>
       <div class="bar-l"><span id="capsBar" style="width:0%"></span></div>
     </div>
@@ -68,18 +73,27 @@
       <svg id="map" viewBox="0 0 900 700" role="img" aria-label="Map">
         <g id="gOut"></g>
         <g id="gIn"></g>
+        <g id="gSel"></g>
         <g id="gCaps"></g>
         <g id="gPucks"></g>
       </svg>
       <div class="caption" id="mapCaption">Europe</div>
-      <button id="clearBtn" hidden aria-label="Clear selection" title="Clear selection">
+      <div class="projnote" id="projLabel"></div>
+      <button id="clearBtn" hidden data-i18n-attr="clearSelection" aria-label="Clear selection" title="Clear selection">
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" aria-hidden="true">
           <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"></circle>
           <path d="m9 9 6 6M15 9l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
         </svg>
       </button>
       <div class="lockveil" id="lockveil" hidden>
-        <span class="key" aria-hidden="true"></span>
+        <span class="key" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none" aria-hidden="true">
+            <path d="M10.5 13.5V10a5.5 5.5 0 0 1 11 0v3.5" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"></path>
+            <rect x="7" y="13.5" width="18" height="13.5" rx="4.2" fill="currentColor"></rect>
+            <circle cx="16" cy="20.2" r="1.9" fill="#fff"></circle>
+            <path d="M16 21.4v2.4" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </span>
         <h3 id="lockTitle">Locked</h3>
         <p id="lockText"></p>
       </div>
@@ -87,50 +101,57 @@
 
     <aside class="side">
       <div class="panel detail" id="detailPanel" hidden>
-        <h3>Selected</h3>
-        <div id="dName" class="name">—</div>
+        <h3 data-i18n="selected">Selected</h3>
+        <div class="nameline">
+          <span class="dflag" id="dFlag"></span>
+          <div id="dName" class="name">–</div>
+        </div>
         <div id="dMeta" class="meta"></div>
         <div class="rowset">
           <div class="row">
-            <label for="fVisited">Visited</label>
-            <button class="switch" id="fVisited" role="switch" aria-checked="false" aria-label="Visited"></button>
+            <label for="fVisited" data-i18n="visited">Visited</label>
+            <button class="switch" id="fVisited" role="switch" aria-checked="false" data-i18n-attr="visited" aria-label="Visited"></button>
           </div>
           <div class="row">
-            <label for="fYear">First visit</label>
-            <input type="number" id="fYear" min="1900" max="2100" placeholder="year">
+            <label for="fYear" data-i18n="firstVisit">First visit</label>
+            <input type="number" id="fYear" min="1900" max="2100" data-i18n-ph="yearPlaceholder" placeholder="year">
           </div>
           <div class="row">
-            <label for="fCap">Capital seen</label>
-            <button class="switch" id="fCap" role="switch" aria-checked="false" aria-label="Capital seen"></button>
+            <label for="fCap" data-i18n="capitalSeen">Capital seen</label>
+            <button class="switch" id="fCap" role="switch" aria-checked="false" data-i18n-attr="capitalSeen" aria-label="Capital seen"></button>
           </div>
         </div>
-        <p class="hint" id="dHint" hidden>Sign in to change these.</p>
+        <p class="hint" id="dHint" data-i18n="signInToChange" hidden>Sign in to change these.</p>
       </div>
 
       <div class="panel">
-        <h3>Legend</h3>
+        <h3 data-i18n="legend">Legend</h3>
         <div class="legend">
           <div>
             <svg width="22" height="16" aria-hidden="true"><rect x="1" y="2" width="20" height="12" rx="3" fill="#dbe3dd" stroke="#b8c5bd"></rect></svg>
-            Not visited
+            <span data-i18n="notVisited">Not visited</span>
           </div>
           <div>
             <svg width="22" height="16" aria-hidden="true"><rect x="1" y="2" width="20" height="12" rx="3" fill="#0e8b7e"></rect></svg>
-            Visited
+            <span data-i18n="visited">Visited</span>
           </div>
           <div>
             <svg width="22" height="16" aria-hidden="true"><circle cx="11" cy="8" r="2.6" fill="#0f1512"></circle></svg>
-            Capital seen
+            <span data-i18n="capitalSeen">Capital seen</span>
           </div>
         </div>
       </div>
 
-      <div class="panel">
-        <h3>Data</h3>
-        <p class="hint" id="syncState" style="margin-top:0">Loading…</p>
+      <div class="panel" id="visitedPanel" hidden>
+        <h3 data-i18n="visited">Visited</h3>
+        <div class="flaggrid" id="visitedFlags"></div>
+      </div>
+
+      <div class="panel" id="dataPanel" hidden>
+        <h3 data-i18n="dataH">Data</h3>
+        <p class="hint" id="syncState" style="margin-top:0" data-i18n="loading">Loading…</p>
         <div class="datarow">
-          <button id="exportBtn">Download JSON</button>
-          <button id="pwChangeBtn" hidden>Change password</button>
+          <button id="pwChangeBtn" data-i18n="changePassword" hidden>Change password</button>
         </div>
       </div>
     </aside>
@@ -142,12 +163,25 @@
   </div>
   <div id="lists"></div>
 
+  <section class="dlblock">
+    <div class="dlhead">
+      <h2 data-i18n="download">Download</h2>
+      <p data-i18n-html="dlDesc">Boundaries as GeoJSON in WGS 84 (EPSG:4326), with the attributes: <code>name</code>,
+        <code>iso</code> and <code>continent</code>. Opens in ArcGIS, QGIS and anything else that
+        reads GeoJSON. Geometry from Natural Earth 1:110m (public domain), which holds 175 of the
+        listed places – the smallest states and territories have no outline at that scale.</p>
+    </div>
+    <div class="dlgrid" id="dlgrid"></div>
+    <p class="hint" id="dlNote" data-i18n-html="dlNote">Records of visits stay in <code>data/travel.json</code> –
+      <button class="linkbtn" id="exportBtn">download that file</button>.</p>
+  </section>
+
   <footer>
     <div class="foot-in">
       <div class="foot-top">
         <span class="foot-mark">Travelmap</span>
-        <p class="foot-lead">Travelmap is a personal record — countries, capitals and territories,
-          counted and kept up to date by hand.</p>
+        <p class="foot-lead" data-i18n-html="footLead">Travelmap my personal record of countries, capitals and territories,<br>
+          tracked and updated by hand since 2015.</p>
       </div>
       <div class="foot-rule"></div>
       <div class="foot-bottom">
@@ -159,46 +193,55 @@
 </div>
 
 <dialog id="loginDlg">
-  <h3>Sign in to edit</h3>
-  <p>Anyone can browse the map. The password only unlocks editing.</p>
+  <h3 data-i18n="loginTitle">Sign in to edit</h3>
+  <p data-i18n="loginText">Anyone can browse the map. The password only unlocks editing.</p>
   <label class="field">
-    <span>Password</span>
+    <span data-i18n="password">Password</span>
     <input type="password" id="pw" placeholder="••••••••" autocomplete="current-password">
   </label>
   <p class="err" id="pwErr"></p>
   <div class="dlg-actions">
-    <button id="loginCancel">Cancel</button>
-    <button class="primary" id="loginGo">Unlock</button>
+    <button id="loginCancel" data-i18n="cancel">Cancel</button>
+    <button class="primary" id="loginGo" data-i18n="unlock">Unlock</button>
+  </div>
+</dialog>
+
+<dialog id="logoutDlg">
+  <h3 data-i18n="logoutTitle">Sign out?</h3>
+  <p data-i18n="logoutText">Editing will be locked again. Unsaved changes stay in this browser.</p>
+  <div class="dlg-actions">
+    <button id="logoutCancel" data-i18n="stay">Stay signed in</button>
+    <button class="primary" id="logoutGo" data-i18n="signOut">Sign out</button>
   </div>
 </dialog>
 
 <dialog id="tokenDlg">
-  <h3>Save to GitHub</h3>
-  <p>A token with write access to the repository lets edits made here show up on every other
+  <h3 data-i18n="tokenTitle">Save to GitHub</h3>
+  <p data-i18n="tokenText">A token with write access to the repository lets edits made here show up on every other
     device. It is stored in this browser only.</p>
   <label class="field">
-    <span>GitHub token</span>
+    <span data-i18n="tokenLabel">GitHub token</span>
     <input type="password" id="tok" placeholder="github_pat_…" autocomplete="off">
   </label>
   <p class="err" id="tokErr"></p>
   <div class="dlg-actions">
-    <button id="tokCancel">Cancel</button>
-    <button class="primary" id="tokGo">Save now</button>
+    <button id="tokCancel" data-i18n="cancel">Cancel</button>
+    <button class="primary" id="tokGo" data-i18n="saveNow">Save now</button>
   </div>
 </dialog>
 
 <dialog id="pwDlg">
-  <h3>Change password</h3>
-  <p>The password itself is never stored. Commit the line below into
+  <h3 data-i18n="pwTitle">Change password</h3>
+  <p data-i18n-html="pwText">The password itself is never stored. Commit the line below into
     <code>assets/config.js</code> and the new password takes effect.</p>
   <label class="field">
-    <span>New password</span>
-    <input type="password" id="pwNew" placeholder="at least 12 characters" autocomplete="new-password">
+    <span data-i18n="pwNew">New password</span>
+    <input type="password" id="pwNew" data-i18n-ph="pwPlaceholder" placeholder="at least 12 characters" autocomplete="new-password">
   </label>
   <pre id="pwOut" hidden></pre>
   <div class="dlg-actions">
-    <button id="pwClose">Close</button>
-    <button class="primary" id="pwMake">Generate line</button>
+    <button id="pwClose" data-i18n="close">Close</button>
+    <button class="primary" id="pwMake" data-i18n="pwMake">Generate line</button>
   </div>
 </dialog>
 

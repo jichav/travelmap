@@ -4,15 +4,25 @@
 //       partial = partially recognised states  ·  territory = dependencies and autonomous territories
 // tiny = drawn on the map as a callout circle instead of an outline.
 window.CONTINENTS = ["Europe","Asia","Africa","North America","South America","Oceania"];
+// Each view picks the projection that suits its region: an equal-area world, conformal conics
+// for the mid-latitude landmasses, Albers equal-area conics for the ones straddling the equator.
 window.CONTINENT_VIEW = {
-  "World":         { "bbox": [[-178, -56], [178, 80]],  "rotate": [0, 0] },
-  "Europe":        { "bbox": [[-25, 34.5], [42, 71]],   "rotate": [0, 0] },
-  "Asia":          { "bbox": [[26, -11], [150, 62]],    "rotate": [0, 0] },
-  "Africa":        { "bbox": [[-22, -36], [54, 38]],    "rotate": [0, 0] },
-  "North America": { "bbox": [[-170, 5], [-12, 72]],    "rotate": [0, 0] },
-  "South America": { "bbox": [[-84, -57], [-33, 14]],   "rotate": [0, 0] },
-  "Oceania":       { "bbox": [[108, -48], [182, 16]],   "rotate": [-160, 0] }
+  "World":         { "bbox": [[-180, -58], [180, 84]],  "type": "equalEarth",     "rotate": [0, 0], "fitGeom": true, "pad": 6, "label": "Equal Earth · EPSG:8857", "labelCs": "Equal Earth · EPSG:8857" },
+  "Europe":        { "bbox": [[-25, 34.5], [42, 71]],   "type": "conicConformal", "rotate": [-14, 0], "parallels": [43, 62], "shift": -0.045, "label": "Lambert conformal conic 43°/62°N · ESRI:102014", "labelCs": "Lambertovo konformní kónické 43°/62°s.š. · ESRI:102014" },
+  "Asia":          { "bbox": [[26, -11], [150, 62]],    "type": "conicEqualArea", "rotate": [-88, 0], "parallels": [10, 50], "label": "Albers equal-area conic 10°/50°N · ESRI:102025", "labelCs": "Albersovo stejnoplochové kónické 10°/50°s.š. · ESRI:102025" },
+  "Africa":        { "bbox": [[-22, -36], [54, 38]],    "type": "conicEqualArea", "rotate": [-16, 0], "parallels": [-18, 32], "label": "Albers equal-area conic 18°S/32°N · ESRI:102022", "labelCs": "Albersovo stejnoplochové kónické 18°j.š./32°s.š. · ESRI:102022" },
+  "North America": { "bbox": [[-170, 5], [-12, 72]],    "type": "conicConformal", "rotate": [95, 0],  "parallels": [22, 55], "shift": -0.04, "label": "Lambert conformal conic 22°/55°N · ESRI:102009", "labelCs": "Lambertovo konformní kónické 22°/55°s.š. · ESRI:102009" },
+  "South America": { "bbox": [[-84, -57], [-33, 14]],   "type": "conicEqualArea", "rotate": [60, 0],  "parallels": [-5, -42], "label": "Albers equal-area conic 5°/42°S · ESRI:102033", "labelCs": "Albersovo stejnoplochové kónické 5°/42°j.š. · ESRI:102033" },
+  "Oceania":       { "bbox": [[108, -48], [182, 16]],   "type": "conicEqualArea", "rotate": [-150, 0], "parallels": [-8, -38], "label": "Albers equal-area conic 8°/38°S · WGS 84", "labelCs": "Albersovo stejnoplochové kónické 8°/38°j.š. · WGS 84" }
 };
+
+// ISO 3166-1 numeric → alpha-2, used to address the flag images.
+window.ISO_A2 = (function () {
+  const s = "004af 008al 010aq 012dz 016as 020ad 024ao 028ag 031az 032ar 036au 040at 044bs 048bh 050bd 051am 052bb 056be 060bm 064bt 068bo 070ba 072bw 074bv 076br 084bz 086io 090sb 092vg 096bn 100bg 104mm 108bi 112by 116kh 120cm 124ca 132cv 136ky 140cf 144lk 148td 152cl 156cn 158tw 162cx 166cc 170co 174km 175yt 178cg 180cd 184ck 188cr 191hr 192cu 196cy 203cz 204bj 208dk 212dm 214do 218ec 222sv 226gq 231et 232er 233ee 234fo 238fk 239gs 242fj 246fi 248ax 250fr 254gf 258pf 260tf 262dj 266ga 268ge 270gm 275ps 276de 288gh 292gi 296ki 300gr 304gl 308gd 312gp 316gu 320gt 324gn 328gy 332ht 334hm 336va 340hn 344hk 348hu 352is 356in 360id 364ir 368iq 372ie 376il 380it 384ci 388jm 392jp 398kz 400jo 404ke 408kp 410kr 414kw 417kg 418la 422lb 426ls 428lv 430lr 434ly 438li 440lt 442lu 446mo 450mg 454mw 458my 462mv 466ml 470mt 474mq 478mr 480mu 484mx 492mc 496mn 498md 499me 500ms 504ma 508mz 512om 516na 520nr 524np 528nl 531cw 533aw 534sx 535bq 540nc 548vu 554nz 558ni 562ne 566ng 570nu 574nf 578no 580mp 581um 583fm 584mh 585pw 586pk 591pa 598pg 600py 604pe 608ph 612pn 616pl 620pt 624gw 626tl 630pr 634qa 638re 642ro 643ru 646rw 652bl 654sh 659kn 660ai 662lc 663mf 666pm 670vc 674sm 678st 682sa 686sn 688rs 690sc 694sl 702sg 703sk 704vn 705si 706so 710za 716zw 724es 728ss 729sd 732eh 740sr 744sj 748sz 752se 756ch 760sy 762tj 764th 768tg 772tk 776to 780tt 784ae 788tn 792tr 795tm 796tc 798tv 800ug 804ua 807mk 818eg 826gb 831gg 832je 833im 834tz 840us 850vi 854bf 858uy 860uz 862ve 876wf 882ws 887ye 894zm";
+  const m = { XKX: "xk" };
+  s.split(" ").forEach(t => { m[t.slice(0, 3)] = t.slice(3); });
+  return m;
+})();
 window.NAME_TO_ID = { "Kosovo": "XKX", "N. Cyprus": "XNC", "Somaliland": "XSO" };
 window.COUNTRIES = [
   {id:"008", name:"Albania", capital:"Tirana", ll:[19.82,41.33], continent:"Europe", kind:"state"},

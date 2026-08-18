@@ -9,7 +9,7 @@ window.CONFIG = {
   // Where the data lives, so edits can be saved back to GitHub from any device.
   // Fill these in with your own repository.
   github: {
-    owner: "your-github-username",
+    owner: "jichav",
     repo: "travelmap",
     branch: "main",
     path: "data/travel.json"
