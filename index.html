@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Travelmap</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230e8b7e'/%3E%3Cpath d='M16 26s8-8.6 8-14a8 8 0 0 0-16 0c0 5.4 8 14 8 14Z' fill='none' stroke='white' stroke-width='2.4' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='11.6' r='2.7' fill='white'/%3E%3C/svg%3E">
+<meta name="description" content="Travelmap — the personal travel map of Václav Jícha.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<script src="assets/config.js"></script>
+<script src="assets/countries.js"></script>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="bar">
+   <div class="bar-in">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 26" width="16" height="17" fill="none" aria-hidden="true">
+          <path d="M12 23.5S19.5 15.4 19.5 9.5A7.5 7.5 0 0 0 4.5 9.5C4.5 15.4 12 23.5 12 23.5Z" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"></path>
+          <circle cx="12" cy="9.4" r="2.5" fill="#fff"></circle>
+        </svg>
+      </span>
+      <span class="n">Travelmap</span>
+    </div>
+    <div class="session">
+      <span class="chip" id="mode">Reading</span>
+      <button id="unlockBtn">Sign in</button>
+      <button id="saveBtn" class="primary" hidden>Save</button>
+    </div>
+   </div>
+  </header>
+
+  <section class="intro">
+    <h1>Every country I have set foot in.</h1>
+    <p>195 countries and just over 250 places once territories are counted. Continents stay
+      closed until the first one there is marked as visited.</p>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="k" id="scopeLabel">of Europe</div>
+      <div class="v" id="pct">0<small>%</small></div>
+      <div class="bar-l"><span id="pctBar" style="width:0%"></span></div>
+    </div>
+    <div class="stat">
+      <div class="k">Countries</div>
+      <div class="v" id="cnt">0<small> / 0</small></div>
+      <div class="bar-l"><span id="cntBar" style="width:0%"></span></div>
+    </div>
+    <div class="stat">
+      <div class="k">Capitals</div>
+      <div class="v" id="caps">0<small> / 0</small></div>
+      <div class="bar-l"><span id="capsBar" style="width:0%"></span></div>
+    </div>
+  </section>
+
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+
+  <div class="board">
+    <div class="mapcard" id="mapcard">
+      <svg id="map" viewBox="0 0 900 700" role="img" aria-label="Map">
+        <g id="gOut"></g>
+        <g id="gIn"></g>
+        <g id="gCaps"></g>
+        <g id="gPucks"></g>
+      </svg>
+      <div class="caption" id="mapCaption">Europe</div>
+      <button id="clearBtn" hidden aria-label="Clear selection" title="Clear selection">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"></circle>
+          <path d="m9 9 6 6M15 9l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+        </svg>
+      </button>
+      <div class="lockveil" id="lockveil" hidden>
+        <span class="key" aria-hidden="true"></span>
+        <h3 id="lockTitle">Locked</h3>
+        <p id="lockText"></p>
+      </div>
+    </div>
+
+    <aside class="side">
+      <div class="panel detail" id="detailPanel" hidden>
+        <h3>Selected</h3>
+        <div id="dName" class="name">—</div>
+        <div id="dMeta" class="meta"></div>
+        <div class="rowset">
+          <div class="row">
+            <label for="fVisited">Visited</label>
+            <button class="switch" id="fVisited" role="switch" aria-checked="false" aria-label="Visited"></button>
+          </div>
+          <div class="row">
+            <label for="fYear">First visit</label>
+            <input type="number" id="fYear" min="1900" max="2100" placeholder="year">
+          </div>
+          <div class="row">
+            <label for="fCap">Capital seen</label>
+            <button class="switch" id="fCap" role="switch" aria-checked="false" aria-label="Capital seen"></button>
+          </div>
+        </div>
+        <p class="hint" id="dHint" hidden>Sign in to change these.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Legend</h3>
+        <div class="legend">
+          <div>
+            <svg width="22" height="16" aria-hidden="true"><rect x="1" y="2" width="20" height="12" rx="3" fill="#dbe3dd" stroke="#b8c5bd"></rect></svg>
+            Not visited
+          </div>
+          <div>
+            <svg width="22" height="16" aria-hidden="true"><rect x="1" y="2" width="20" height="12" rx="3" fill="#0e8b7e"></rect></svg>
+            Visited
+          </div>
+          <div>
+            <svg width="22" height="16" aria-hidden="true"><circle cx="11" cy="8" r="2.6" fill="#0f1512"></circle></svg>
+            Capital seen
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Data</h3>
+        <p class="hint" id="syncState" style="margin-top:0">Loading…</p>
+        <div class="datarow">
+          <button id="exportBtn">Download JSON</button>
+          <button id="pwChangeBtn" hidden>Change password</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="listhead">
+    <h2 id="listTitle">Europe</h2>
+    <div class="m" id="listCount"></div>
+  </div>
+  <div id="lists"></div>
+
+  <footer>
+    <div class="foot-in">
+      <div class="foot-top">
+        <span class="foot-mark">Travelmap</span>
+        <p class="foot-lead">Travelmap is a personal record — countries, capitals and territories,
+          counted and kept up to date by hand.</p>
+      </div>
+      <div class="foot-rule"></div>
+      <div class="foot-bottom">
+        <span>© 2026 Václav Jícha</span>
+        <span id="stamp"></span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<dialog id="loginDlg">
+  <h3>Sign in to edit</h3>
+  <p>Anyone can browse the map. The password only unlocks editing.</p>
+  <label class="field">
+    <span>Password</span>
+    <input type="password" id="pw" placeholder="••••••••" autocomplete="current-password">
+  </label>
+  <p class="err" id="pwErr"></p>
+  <div class="dlg-actions">
+    <button id="loginCancel">Cancel</button>
+    <button class="primary" id="loginGo">Unlock</button>
+  </div>
+</dialog>
+
+<dialog id="tokenDlg">
+  <h3>Save to GitHub</h3>
+  <p>A token with write access to the repository lets edits made here show up on every other
+    device. It is stored in this browser only.</p>
+  <label class="field">
+    <span>GitHub token</span>
+    <input type="password" id="tok" placeholder="github_pat_…" autocomplete="off">
+  </label>
+  <p class="err" id="tokErr"></p>
+  <div class="dlg-actions">
+    <button id="tokCancel">Cancel</button>
+    <button class="primary" id="tokGo">Save now</button>
+  </div>
+</dialog>
+
+<dialog id="pwDlg">
+  <h3>Change password</h3>
+  <p>The password itself is never stored. Commit the line below into
+    <code>assets/config.js</code> and the new password takes effect.</p>
+  <label class="field">
+    <span>New password</span>
+    <input type="password" id="pwNew" placeholder="at least 12 characters" autocomplete="new-password">
+  </label>
+  <pre id="pwOut" hidden></pre>
+  <div class="dlg-actions">
+    <button id="pwClose">Close</button>
+    <button class="primary" id="pwMake">Generate line</button>
+  </div>
+</dialog>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
