@@ -1,6 +1,145 @@
 {
-  "updated": "2026-08-18T00:00:00.000Z",
+  "updated": "2026-08-18T11:29:34.502Z",
   "countries": {
-    "203": { "year": null, "capital": true }
+    "100": {
+      "year": 2026,
+      "capital": true
+    },
+    "191": {
+      "year": 2024,
+      "capital": true
+    },
+    "196": {
+      "year": 2024,
+      "capital": true
+    },
+    "203": {
+      "year": null,
+      "capital": true
+    },
+    "208": {
+      "year": 2023,
+      "capital": true
+    },
+    "233": {
+      "year": 2018,
+      "capital": true
+    },
+    "246": {
+      "year": 2018,
+      "capital": true
+    },
+    "250": {
+      "year": 2022,
+      "capital": false
+    },
+    "276": {
+      "year": 2016,
+      "capital": true
+    },
+    "348": {
+      "year": 2022,
+      "capital": true
+    },
+    "372": {
+      "year": 2019,
+      "capital": true
+    },
+    "380": {
+      "year": 2017,
+      "capital": false
+    },
+    "428": {
+      "year": 2018,
+      "capital": true
+    },
+    "438": {
+      "year": 2023,
+      "capital": true
+    },
+    "440": {
+      "year": 2018,
+      "capital": true
+    },
+    "442": {
+      "year": 2022,
+      "capital": false
+    },
+    "492": {
+      "year": 2023,
+      "capital": true
+    },
+    "528": {
+      "year": 2022,
+      "capital": false
+    },
+    "616": {
+      "year": 2018,
+      "capital": true
+    },
+    "642": {
+      "year": 2023,
+      "capital": false
+    },
+    "643": {
+      "year": 2018,
+      "capital": false
+    },
+    "688": {
+      "year": 2023,
+      "capital": true
+    },
+    "703": {
+      "year": 2016,
+      "capital": true
+    },
+    "705": {
+      "year": 2024,
+      "capital": true
+    },
+    "724": {
+      "year": 2025,
+      "capital": false
+    },
+    "752": {
+      "year": 2023,
+      "capital": false
+    },
+    "756": {
+      "year": 2023,
+      "capital": false
+    },
+    "792": {
+      "year": 2023,
+      "capital": false
+    },
+    "807": {
+      "year": 2026,
+      "capital": true
+    },
+    "826": {
+      "year": 2019,
+      "capital": true
+    },
+    "XNC": {
+      "year": 2024,
+      "capital": true
+    },
+    "040": {
+      "year": 2021,
+      "capital": true
+    },
+    "056": {
+      "year": 2019,
+      "capital": true
+    },
+    "008": {
+      "year": 2024,
+      "capital": true
+    },
+    "070": {
+      "year": 2026,
+      "capital": true
+    }
   }
 }
