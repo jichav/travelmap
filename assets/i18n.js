@@ -51,7 +51,7 @@ window.I18N = {
     dlNote: 'Records of visits stay in <code>data/travel.json</code> – <button class="linkbtn" id="exportBtn">download that file</button>.',
     noData: "no data",
     mapUnavailable: "{scope} – map data unavailable",
-    footLead: "Travelmap my personal record of countries, capitals and territories,<br>tracked and updated by hand since 2015.",
+    footLead: "Travelmap is my personal record of countries, regions and capitals,<br>tracked and updated by hand since 2015.",
     loginTitle: "Sign in to edit",
     loginText: "Anyone can browse the map. The password only unlocks editing.",
     password: "Password",
@@ -72,6 +72,8 @@ window.I18N = {
     logoutTitle: "Sign out?",
     logoutText: "Editing will be locked again. Unsaved changes stay in this browser.",
     stay: "Stay signed in",
+    navCountries: "Countries",
+    navRegions: "Regions",
     langEn: "English",
     langCs: "Čeština",
     continents: {
@@ -155,6 +157,8 @@ window.I18N = {
     logoutTitle: "Opravdu se odhlásit?",
     logoutText: "Úpravy se znovu zamknou. Neuložené změny zůstanou v tomto prohlížeči.",
     stay: "Zůstat přihlášen",
+    navCountries: "Státy",
+    navRegions: "Kraje",
     langEn: "English",
     langCs: "Čeština",
     continents: {

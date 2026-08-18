@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Travelmap · Geocaching</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2304884e'/%3E%3Crect x='6' y='13' width='20' height='12' rx='3' fill='none' stroke='white' stroke-width='2.2'/%3E%3Cpath d='M11 13V10a5 5 0 0 1 10 0v3' fill='none' stroke='white' stroke-width='2.2'/%3E%3C/svg%3E">
+<meta name="description" content="Geocaching statistiky českých okresů.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/gc.css">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-server@3.0.1/dist/topojson-server.min.js" crossorigin="anonymous"></script>
+<script src="assets/config.js"></script>
+<script src="assets/regions-data.js"></script>
+</head>
+<body>
+
+<div id="gate">
+  <div class="box">
+    <h2>Geocaching statistiky</h2>
+    <p>Samostatný přehled českých okresů. Heslo stránku jen skrývá – repozitář je veřejný.</p>
+    <label class="field">
+      <span>Heslo</span>
+      <input type="password" id="gatePw" placeholder="••••" autocomplete="off">
+    </label>
+    <p class="err" id="gateErr"></p>
+    <div class="dlg-actions">
+      <a href="regions.html" style="align-self:center;font-size:13px;margin-right:auto">Zpět na kraje</a>
+      <button class="primary" id="gateGo">Otevřít</button>
+    </div>
+  </div>
+</div>
+
+<header class="bar">
+  <div class="bar-in">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none">
+          <rect x="3" y="10" width="18" height="10" rx="2.5" stroke="#fff" stroke-width="1.9"></rect>
+          <path d="M7.5 10V7.6a4.5 4.5 0 0 1 9 0V10" stroke="#fff" stroke-width="1.9"></path>
+        </svg>
+      </span>
+      <span class="n">Travelmap</span>
+      <span class="sub">Geocaching</span>
+    </div>
+    <div class="session">
+      <span class="chip" id="mode">Záznam</span>
+      <a href="regions.html" style="font-size:13px">Kraje a okresy</a>
+      <button id="saveBtn" class="primary">Uložit</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="intro">
+    <h1>Okresy v keších</h1>
+    <p>Co jsem v jednotlivých okresech našel: typy keší, velikosti, terén a obtížnost.
+      Záznam je oddělený od cestovní mapy a do jejích čísel se nepočítá.</p>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="k">Okresy s keší</div>
+      <div class="v" id="cntDis">0<small> / 77</small></div>
+      <div class="bar-l"><span id="disBar" style="width:0%"></span></div>
+    </div>
+    <div class="stat">
+      <div class="k">Typy</div>
+      <div class="v" id="cntType">0<small> / 8</small></div>
+      <div class="bar-l"><span id="typeBar" style="width:0%"></span></div>
+    </div>
+    <div class="stat">
+      <div class="k">Velikosti</div>
+      <div class="v" id="cntSize">0<small> / 5</small></div>
+      <div class="bar-l"><span id="sizeBar" style="width:0%"></span></div>
+    </div>
+    <div class="stat">
+      <div class="k">Kraje s keší</div>
+      <div class="v" id="cntReg">0<small> / 14</small></div>
+      <div class="bar-l"><span id="regBar" style="width:0%"></span></div>
+    </div>
+  </section>
+
+  <div class="board">
+    <div class="mapcard">
+      <svg id="map" viewBox="0 0 900 560" role="img" aria-label="Mapa okresů">
+        <rect id="mapGround" x="0" y="0" width="100%" height="100%"></rect>
+        <g id="gWorld"></g>
+        <g id="gUnits"></g>
+        <g id="gEdge"></g>
+        <g id="gSel"></g>
+        <g id="gScale"></g>
+      </svg>
+      <div class="caption" id="mapCaption">Česko</div>
+      <div class="projnote">ETRS89 / UTM 33N · EPSG:25833</div>
+    </div>
+
+    <aside>
+      <div class="panel" id="detailPanel">
+        <h3>Okres</h3>
+        <div class="name" id="dName">Vyber okres</div>
+        <div class="meta" id="dMeta">Klikni do mapy nebo do seznamu pod ní.</div>
+        <div id="groups"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Legenda</h3>
+        <div class="hint" id="legend" style="margin-top:8px">
+          Sytost výplně roste s tím, kolik údajů okres má: nic, 1–3, 4–8, devět a více.
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Data</h3>
+        <p class="hint" id="syncState" style="margin-top:8px">Načítám…</p>
+        <div class="datarow">
+          <button id="dlBtn">Stáhnout JSON</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="listhead">
+    <h2>Okresy po krajích</h2>
+    <div class="m" id="listCount"></div>
+  </div>
+  <div id="lists"></div>
+
+  <footer>
+    <div class="foot">
+      <span>© 2026 Václav Jícha</span>
+      <span id="stamp"></span>
+    </div>
+  </footer>
+</div>
+
+<dialog id="tokenDlg">
+  <h3>Uložit na GitHub</h3>
+  <p>Token s právem zápisu do repozitáře. Zůstává jen v tomto prohlížeči.</p>
+  <label class="field">
+    <span>GitHub token</span>
+    <input type="password" id="tok" placeholder="github_pat_…" autocomplete="off">
+  </label>
+  <p class="err" id="tokErr"></p>
+  <div class="dlg-actions">
+    <button id="tokCancel">Zrušit</button>
+    <button class="primary" id="tokGo">Uložit</button>
+  </div>
+</dialog>
+
+<script src="assets/gc/app.js"></script>
+</body>
+</html>

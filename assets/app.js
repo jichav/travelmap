@@ -469,6 +469,8 @@
       img.src = "https://flagcdn.com/" + ISO_A2[c.id] + ".svg";
       img.alt = "";
       img.loading = "lazy";
+      img.style.cssText = "display:block;width:100%;height:100%;object-fit:cover";
+      b.style.cssText = "width:28px;height:21px;padding:0;border:0;border-radius:3px;overflow:hidden;background:none";
       img.onerror = () => b.remove();
       b.appendChild(img);
       b.onclick = () => select(c.id);
@@ -514,12 +516,14 @@
         b.innerHTML = '<span class="lbl"><span class="fl"></span><span class="t"></span></span><span class="y"></span>';
         b.querySelector(".t").textContent = nameOf(c);
         const fl = b.querySelector(".fl");
+        fl.style.cssText = "flex:0 0 auto;width:22px;height:16.5px;border-radius:2px;overflow:hidden";
         const a2 = ISO_A2[c.id];
         if (a2) {
           const img = document.createElement("img");
           img.src = "https://flagcdn.com/" + a2 + ".svg";
           img.alt = "";
           img.loading = "lazy";
+          img.style.cssText = "display:block;width:100%;height:100%;object-fit:cover";
           img.onerror = () => fl.remove();
           fl.appendChild(img);
         } else fl.remove();
@@ -552,6 +556,7 @@
       const img = document.createElement("img");
       img.src = "https://flagcdn.com/" + a2 + ".svg";
       img.alt = "";
+      img.style.cssText = "display:block;width:100%;height:100%;object-fit:cover";
       img.onerror = () => { dfl.hidden = true; };
       dfl.appendChild(img);
     }

@@ -64,3 +64,19 @@ the Pacific islands) are drawn as a clickable callout circle joined by a hairlin
 real location, so they never disappear or overlap.
 
 The list follows Czech practice: Kosovo is included as a state, under partially recognised.
+
+## Regions and districts
+
+`regions.html` is a second, separate page for the regions and districts of Czechia
+(and, later, its neighbours). It shares the stylesheet, the language switch and the
+sign-in, but keeps its own record in `data/regions.json` – nothing there is counted
+into the country totals on the main page.
+
+Boundaries are fetched at runtime from geoBoundaries gbOpen (CC BY 4.0): ADM1 for the
+14 kraje, ADM2 for the 77 okresy. Files to upload:
+
+    regions.html
+    assets/regions.js
+    assets/regions-data.js
+    assets/i18n-regions.js
+    data/regions.json
