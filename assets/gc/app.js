@@ -1,36 +1,60 @@
-// Geocaching page: Czech okresy only, with the found types, sizes, terrain and difficulty
-// ticked per okres. Geometry is loaded the same way as on the regions page; the record
-// lives in data/geocaching.json and is pushed back with a token the user pastes.
+// Geocaching page: Czech kraje and okresy, recorded at two levels.
+//   kraj  — the 9×9 difficulty/terrain matrix, nothing else
+//   okres — cache types, sizes, terrain steps and difficulty steps
+// The map carries no status fill; at okres level each okres is labelled with what is
+// still MISSING there, which is the only thing worth reading off a map. Everything else
+// lives in the analysis below the map and is reached by clicking the map.
 (function () {
   "use strict";
   const $ = id => document.getElementById(id);
   const CFG = window.CONFIG;
   const SS = "travelmap.gc.v1";
-  const LS_DATA = "travelmap.geocaching.v1";
+  const LS_DATA = "travelmap.geocaching.v3";
   const LS_TOKEN = "travelmap.token.v1";
   const DATA_PATH = (CFG.github && CFG.github.gcPath) || "data/geocaching.json";
 
+  const TYPES = [
+    { k: "trad", label: "Tradiční" },
+    { k: "multi", label: "Multi" },
+    { k: "mystery", label: "Mystery" },
+    { k: "letterbox", label: "Letterbox" },
+    { k: "wherigo", label: "Wherigo" },
+    { k: "earth", label: "Earthcache" },
+    { k: "virtual", label: "Virtuální" },
+    { k: "event", label: "Event" },
+    { k: "cito", label: "CITO" }
+  ];
+  const SIZES = ["XS", "S", "M", "L", "O", "NCH"];
+  const STEPS = ["1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5"];
+  const num = v => String(v).replace(".", ",");
+  const icon = k => "assets/gc-icons/" + k + ".png";
+
   const GROUPS = [
-    { key: "types", label: "Typ keše",
-      opts: ["Tradiční", "Multi", "Mystery", "Letterbox", "Earthcache", "Wherigo", "Virtuální", "Event"] },
-    { key: "sizes", label: "Velikost",
-      opts: ["Micro", "Small", "Regular", "Large", "Neurčeno"] },
-    { key: "terrain", label: "Terén", nums: true,
-      opts: ["1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5"] },
-    { key: "diff", label: "Obtížnost", nums: true,
-      opts: ["1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5"] }
+    { key: "types", label: "Typy", opts: TYPES.map(t => t.k), n: 9,
+      text: k => (TYPES.find(t => t.k === k) || {}).label, tok: k => ({ icon: k }) },
+    { key: "sizes", label: "Velikosti", opts: SIZES, n: 6, text: v => v, tok: v => ({ text: v }) },
+    { key: "terrain", label: "Terén", opts: STEPS, n: 9,
+      text: v => "T" + num(v), tok: v => ({ text: "T" + num(v) }) },
+    { key: "diff", label: "Obtížnost", opts: STEPS, n: 9,
+      text: v => "D" + num(v), tok: v => ({ text: "D" + num(v) }) }
   ];
 
   const s = {
-    data: { updated: null, districts: {} },
+    data: { updated: null, regions: {}, districts: {} },
     districts: [], regions: [], topo: null, world: null,
-    selected: null, dirty: false, fetchError: null, mapError: false
+    level: "districts", selected: null, selKraj: null,
+    dirty: false, fetchError: null, mapError: false
   };
 
-  const rec = id => s.data.districts[id] || null;
-  const ticks = id => { const r = rec(id); return r ? GROUPS.reduce((n, g) => n + ((r[g.key] || []).length), 0) : 0; };
-  const has = (id, key, val) => { const r = rec(id); return !!r && (r[key] || []).indexOf(val) >= 0; };
-  const byName = (p, q) => p.name.localeCompare(q.name, "cs");
+  const dRec = id => s.data.districts[id] || null;
+  const has = (id, key, val) => { const r = dRec(id); return !!r && (r[key] || []).indexOf(val) >= 0; };
+  const missing = (id, g) => g.opts.filter(v => !has(id, g.key, v));
+  const missCount = id => GROUPS.reduce((n, g) => n + missing(id, g).length, 0);
+  const mRec = id => (s.data.regions[id] && s.data.regions[id].matrix) || [];
+  const cell = (d, t) => d + "/" + t;
+  const mHas = (id, d, t) => mRec(id).indexOf(cell(d, t)) >= 0;
+  const mMiss = id => 81 - mRec(id).length;
+  const pct = (got, all) => Math.round((got / all) * 100) + " %";
   const regionOf = id => s.regions.find(r => r.id === id) || null;
 
   // ── geometry ───────────────────────────────────────────────────────────────
@@ -70,15 +94,22 @@
       const id = window.slugId("CZ", f.properties.tmName);
       f.properties.tmId = id;
       geoms[i].properties.tmId = id;
+      geoms[i].properties.tmKraj = f.properties.tmParent;
       return { id: id, name: f.properties.tmName, parent: f.properties.tmParent, f: f };
     });
-    s.regions = Object.keys(window.CZ_REGIONS).map(cz => ({ id: window.CZ_REGIONS[cz].id, name: cz }));
+    // Kraje are the okres topology dissolved on the parent code, so the two levels share edges.
+    s.regions = Object.keys(window.CZ_REGIONS).map(cz => {
+      const id = window.CZ_REGIONS[cz].id;
+      const parts = geoms.filter(g => g.properties && g.properties.tmKraj === id);
+      const geom = parts.length ? topojson.merge(tp, parts) : null;
+      return { id: id, name: cz, f: geom ? { type: "Feature", properties: {}, geometry: geom } : null };
+    }).filter(r => r.f);
     s.world = topojson.feature(topo, topo.objects.countries).features;
   }
 
   // ── map ────────────────────────────────────────────────────────────────────
-  const W = 900, PAD = 20;
-  let H = 560;
+  const W = 1000, PAD = 16;
+  let H = 620, path = null;
 
   function drawMap() {
     if (!s.districts.length) return;
@@ -92,33 +123,105 @@
 
     const proj = d3.geoTransverseMercator().rotate([-15, 0])
       .fitExtent([[PAD, PAD], [W - PAD, H - PAD]], fc);
-    const path = d3.geoPath(proj);
+    path = d3.geoPath(proj);
 
     d3.select("#gWorld").selectAll("path").data(s.world || [], (d, i) => i)
       .join("path").attr("class", "c-out").attr("d", path);
 
-    d3.select("#gUnits").selectAll("path").data(s.districts, u => u.id)
+    const units = s.level === "regions" ? s.regions : s.districts;
+    // Two tints keyed by kraj: no status is encoded, the shapes just have to read.
+    const tint = u => {
+      const kid = s.level === "regions" ? u.id : u.parent;
+      const i = s.regions.findIndex(r => r.id === kid);
+      return i % 2 ? " b" : "";
+    };
+    d3.select("#gUnits").selectAll("path").data(units, u => u.id)
       .join(enter => { const p = enter.append("path"); p.append("title"); return p; })
       .attr("d", u => path(u.f))
-      .attr("class", u => {
-        const n = ticks(u.id);
-        return "c-in" + (n === 0 ? "" : n < 4 ? " t1" : n < 9 ? " t2" : " t3");
-      })
+      .attr("class", u => "u" + tint(u) + (u.id === s.selected ? " sel" : ""))
       .on("click", (ev, u) => select(u.id))
-      .select("title").text(u => u.name + (ticks(u.id) ? " · " + ticks(u.id) + " údajů" : ""));
+      .select("title").text(u => s.level === "regions"
+        ? u.name + " · chybí " + mMiss(u.id) + " z 81"
+        : u.name + " · chybí " + missCount(u.id));
 
-    // Kraj boundaries: the okres line, twice as thick.
     const tp = s.topo, obj = tp && tp.objects.d;
     const mesh = obj ? [topojson.mesh(tp, obj, (a, b) =>
       a === b || a.properties.tmParent !== b.properties.tmParent)] : [];
     d3.select("#gEdge").selectAll("path").data(mesh)
       .join("path").attr("class", "u-edge").attr("d", path);
 
-    const sel = s.selected ? s.districts.find(u => u.id === s.selected) : null;
-    d3.select("#gSel").selectAll("path").data(sel ? [sel] : [], u => u.id)
-      .join("path").attr("class", "c-sel").attr("d", u => path(u.f));
-
+    drawLabels();
     scaleBar(proj);
+  }
+
+  // Missing items, written into the okres itself. Wrapped into rows so a small okres
+  // still fits three tokens across.
+  const TOK_H = 11, ICON = 9.5, ROW_MAX = 52;
+  function tokens(u) {
+    const out = [];
+    GROUPS.forEach(g => missing(u.id, g).forEach(v => {
+      const t = g.tok(v);
+      out.push(t.icon ? { icon: t.icon, w: ICON + 2 } : { text: t.text, w: 7 + t.text.length * 4.2 });
+    }));
+    return out;
+  }
+  function drawLabels() {
+    const host = d3.select("#gLab");
+    if (s.level === "regions") {
+      host.selectAll("g.lab").remove();
+      // Prague sits inside the Central Bohemian centroid, so the two labels are pulled apart.
+      const nudge = { "CZ-10": [0, -13], "CZ-20": [24, 26] };
+      const kd = s.regions.map(r => {
+        const c = path.centroid(r.f), n = nudge[r.id] || [0, 0];
+        return { r: r, x: c[0] + n[0], y: c[1] + n[1] };
+      }).filter(d => isFinite(d.x));
+      const kg = host.selectAll("g.klab").data(kd, d => d.r.id)
+        .join(enter => {
+          const g = enter.append("g").attr("class", "klab");
+          g.append("text").attr("class", "kp").attr("text-anchor", "middle");
+          g.append("text").attr("class", "kn").attr("text-anchor", "middle");
+          return g;
+        })
+        .attr("transform", d => "translate(" + d.x + "," + d.y + ")");
+      kg.select("text.kp").attr("y", 0).text(d => pct(81 - mMiss(d.r.id), 81));
+      kg.select("text.kn").attr("y", 11)
+        .text(d => d.r.name.replace(/ kraj$/, "").replace(/^Kraj /, "").replace(/^Hlavní město /, ""));
+      return;
+    }
+    host.selectAll("g.klab").remove();
+    const data = s.districts.map(u => {
+      const c = path.centroid(u.f);
+      return { u: u, x: c[0], y: c[1], toks: tokens(u) };
+    }).filter(d => d.toks.length && isFinite(d.x));
+
+    const g = host.selectAll("g.lab").data(data, d => d.u.id)
+      .join(enter => enter.append("g").attr("class", "lab"));
+    g.attr("transform", d => "translate(" + d.x + "," + d.y + ")").html("");
+    g.each(function (d) {
+      const rows = [[]];
+      let w = 0;
+      d.toks.forEach(t => {
+        if (w + t.w > ROW_MAX && rows[rows.length - 1].length) { rows.push([]); w = 0; }
+        rows[rows.length - 1].push(t); w += t.w;
+      });
+      const gg = d3.select(this);
+      const y0 = -((rows.length - 1) * TOK_H) / 2;
+      rows.forEach((row, ri) => {
+        const rw = row.reduce((a, t) => a + t.w, 0);
+        let x = -rw / 2;
+        const y = y0 + ri * TOK_H;
+        row.forEach(t => {
+          if (t.icon) {
+            gg.append("image").attr("href", icon(t.icon))
+              .attr("x", x + 1).attr("y", y - ICON / 2).attr("width", ICON).attr("height", ICON);
+          } else {
+            gg.append("text").attr("class", "tok").attr("x", x + t.w / 2).attr("y", y + 2.6)
+              .attr("text-anchor", "middle").text(t.text);
+          }
+          x += t.w;
+        });
+      });
+    });
   }
 
   function scaleBar(proj) {
@@ -145,115 +248,182 @@
 
   // ── page ───────────────────────────────────────────────────────────────────
   function render() {
-    const nDis = s.districts.length || 77;
-    const vDis = s.districts.filter(u => ticks(u.id)).length;
-    const types = new Set(), sizes = new Set(), regs = new Set();
-    Object.keys(s.data.districts).forEach(id => {
-      const r = s.data.districts[id];
-      (r.types || []).forEach(v => types.add(v));
-      (r.sizes || []).forEach(v => sizes.add(v));
-      const u = s.districts.find(d => d.id === id);
-      if (u && u.parent && ticks(id)) regs.add(u.parent);
-    });
-
-    $("cntDis").innerHTML = vDis + "<small> / " + nDis + "</small>";
-    $("disBar").style.width = (vDis / nDis) * 100 + "%";
-    $("cntType").innerHTML = types.size + "<small> / 8</small>";
-    $("typeBar").style.width = (types.size / 8) * 100 + "%";
-    $("cntSize").innerHTML = sizes.size + "<small> / 5</small>";
-    $("sizeBar").style.width = (sizes.size / 5) * 100 + "%";
-    $("cntReg").innerHTML = regs.size + "<small> / 14</small>";
-    $("regBar").style.width = (regs.size / 14) * 100 + "%";
-
     if (s.mapError) $("mapCaption").textContent = "Hranice se nepodařilo načíst";
     else if (!s.districts.length) $("mapCaption").textContent = "Načítám hranice…";
-    else $("mapCaption").textContent = "Česko";
-
+    else if (s.level === "regions") {
+      const n = s.regions.filter(r => mMiss(r.id)).length;
+      $("mapCaption").textContent = "Kraje · " + n + " ze " + s.regions.length + " má co doplnit";
+    } else {
+      const n = s.districts.filter(u => missCount(u.id)).length;
+      $("mapCaption").textContent = "Okresy · " + n + " ze " + s.districts.length + " má co doplnit";
+    }
+    document.querySelectorAll("#levels button").forEach(b =>
+      b.setAttribute("aria-pressed", String(b.dataset.level === s.level)));
     drawMap();
     renderPanel();
-    renderList();
+    renderTotals();
     syncState();
   }
 
+  function el(tag, cls, txt) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (txt != null) e.textContent = txt;
+    return e;
+  }
+
   function renderPanel() {
-    const u = s.selected ? s.districts.find(d => d.id === s.selected) : null;
-    const host = $("groups");
-    if (!u) {
-      $("dName").textContent = "Vyber okres";
-      $("dMeta").textContent = "Klikni do mapy nebo do seznamu pod ní.";
-      host.innerHTML = "";
+    const host = $("analysis");
+    host.innerHTML = "";
+    const unit = s.selected
+      ? (s.level === "regions" ? s.regions : s.districts).find(u => u.id === s.selected)
+      : null;
+    if (!unit) {
+      $("aName").textContent = s.level === "regions" ? "Vyber kraj" : "Vyber okres";
+      $("aMeta").textContent = "Klikni do mapy.";
       return;
     }
-    const r = regionOf(u.parent);
-    $("dName").textContent = u.name;
-    $("dMeta").textContent = (r ? r.name : "") + " · " + ticks(u.id) + " údajů";
+    if (s.level === "regions") { renderMatrix(host, unit); return; }
+    renderOkres(host, unit);
+  }
+
+  // Foot of the page: how many okresů have each single item, over all 77.
+  function renderTotals() {
+    const host = $("totals");
+    if (!host) return;
+    const all = s.districts.length;
+    if (!all) { host.innerHTML = ""; return; }
     host.innerHTML = "";
     GROUPS.forEach(g => {
-      const box = document.createElement("div");
-      box.className = "group";
-      const h = document.createElement("div");
-      h.className = "gh";
-      h.textContent = g.label;
-      box.appendChild(h);
-      const opts = document.createElement("div");
-      opts.className = "opts" + (g.nums ? " nums" : "");
+      const box = el("section", "tbox");
+      box.appendChild(el("div", "th", g.label));
       g.opts.forEach(v => {
-        const b = document.createElement("button");
-        b.className = "opt";
-        b.type = "button";
-        b.textContent = v;
-        b.setAttribute("aria-pressed", String(has(u.id, g.key, v)));
-        b.onclick = () => toggle(u.id, g.key, v);
-        opts.appendChild(b);
+        const n = s.districts.filter(u => has(u.id, g.key, v)).length;
+        const row = el("div", "trow" + (n === all ? " full" : ""));
+        if (g.key === "types") {
+          const im = document.createElement("img");
+          im.src = icon(v); im.alt = "";
+          row.appendChild(im);
+        } else {
+          row.appendChild(el("span", "sp"));
+        }
+        row.appendChild(el("span", "l", g.text(v)));
+        const bar = el("span", "b");
+        const fill = el("i");
+        fill.style.width = (n / all) * 100 + "%";
+        bar.appendChild(fill);
+        row.appendChild(bar);
+        row.appendChild(el("span", "n", n + "/" + all));
+        row.appendChild(el("span", "p", pct(n, all)));
+        box.appendChild(row);
       });
-      box.appendChild(opts);
       host.appendChild(box);
     });
   }
 
-  function renderList() {
-    const host = $("lists");
-    host.innerHTML = "";
-    const total = s.districts.length;
-    $("listCount").textContent = s.districts.filter(u => ticks(u.id)).length + " z " + total + " okresů se záznamem";
-    s.regions.forEach(r => {
-      const kids = s.districts.filter(d => d.parent === r.id).sort(byName);
-      if (!kids.length) return;
-      const h = document.createElement("h4");
-      h.className = "grouphead";
-      h.innerHTML = '<span class="sw"></span><span class="gl"></span><span class="gc"></span>';
-      h.querySelector(".gl").textContent = r.name;
-      h.querySelector(".gc").textContent = kids.filter(d => ticks(d.id)).length + " z " + kids.length;
-      host.appendChild(h);
-      const grid = document.createElement("div");
-      grid.className = "grid";
-      kids.forEach(u => {
-        const n = ticks(u.id);
-        const b = document.createElement("button");
-        b.className = "tile" + (n ? " on" : "") + (u.id === s.selected ? " sel" : "");
-        b.innerHTML = '<span class="t"></span><span class="y"></span>';
-        b.querySelector(".t").textContent = u.name;
-        b.querySelector(".y").textContent = n ? n + " údajů" : "";
-        b.onclick = () => select(u.id);
-        grid.appendChild(b);
-      });
-      host.appendChild(grid);
+  function renderOkres(host, u) {
+    const r = regionOf(u.parent);
+    const miss = missCount(u.id);
+    $("aName").textContent = u.name;
+    $("aMeta").textContent = (r ? r.name + " · " : "") +
+      (33 - miss) + " z 33 · " + pct(33 - miss, 33);
+    GROUPS.forEach(g => {
+      const box = el("section", "gbox");
+      const head = el("div", "gh");
+      head.appendChild(el("span", "gt", g.label));
+      const mis = missing(u.id, g);
+      head.appendChild(el("span", "gn", (g.n - mis.length) + " / " + g.n));
+      box.appendChild(head);
+
+      const wantRow = el("div", "want");
+      if (!mis.length) wantRow.appendChild(el("span", "done", "Hotovo"));
+      mis.forEach(v => wantRow.appendChild(chip(u.id, g, v, true)));
+      box.appendChild(wantRow);
+
+      const gotv = g.opts.filter(v => has(u.id, g.key, v));
+      if (gotv.length) {
+        const got = el("div", "got");
+        gotv.forEach(v => got.appendChild(chip(u.id, g, v, false)));
+        box.appendChild(got);
+      }
+      host.appendChild(box);
     });
   }
 
-  function select(id) { s.selected = id; render(); }
+  function chip(id, g, v, isMissing) {
+    const b = el("button", isMissing ? "chip want" : "chip got");
+    b.type = "button";
+    if (g.key === "types") {
+      const im = document.createElement("img");
+      im.src = icon(v);
+      im.alt = "";
+      b.appendChild(im);
+    }
+    b.appendChild(el("span", null, g.text(v)));
+    b.title = (isMissing ? "Označit jako nalezené: " : "Zrušit: ") + g.text(v);
+    b.onclick = () => toggle(id, g.key, v);
+    return b;
+  }
+
+  function renderMatrix(host, r) {
+    const miss = mMiss(r.id);
+    $("aName").textContent = r.name;
+    $("aMeta").textContent = "matrix " + (81 - miss) + " z 81 · " + pct(81 - miss, 81);
+    const box = el("section", "gbox wide");
+    const head = el("div", "gh");
+    head.appendChild(el("span", "gt", "Matrix 9 × 9 · obtížnost / terén"));
+    head.appendChild(el("span", "gn", (81 - miss) + " / 81"));
+    box.appendChild(head);
+
+    const grid = el("div", "matrix");
+    grid.appendChild(el("span", "mc", ""));
+    STEPS.forEach(t => grid.appendChild(el("span", "mc", "T" + num(t))));
+    STEPS.forEach(d => {
+      grid.appendChild(el("span", "mc", "D" + num(d)));
+      STEPS.forEach(t => {
+        const b = el("button", "mcell" + (mHas(r.id, d, t) ? " on" : ""));
+        b.type = "button";
+        b.title = "D" + num(d) + " / T" + num(t);
+        b.onclick = () => toggleCell(r.id, d, t);
+        grid.appendChild(b);
+      });
+    });
+    box.appendChild(grid);
+    host.appendChild(box);
+  }
+
+  function setLevel(lvl) {
+    if (s.level === lvl) return;
+    s.level = lvl;
+    s.selected = null;
+    render();
+  }
+  function select(id) { s.selected = s.selected === id ? null : id; render(); }
+
+  function persist() {
+    s.data.updated = new Date().toISOString();
+    s.dirty = true;
+    try { localStorage.setItem(LS_DATA, JSON.stringify(s.data)); } catch (e) {}
+    render();
+  }
 
   function toggle(id, key, val) {
     const r = s.data.districts[id] || (s.data.districts[id] = {});
     const arr = r[key] || (r[key] = []);
     const i = arr.indexOf(val);
     if (i >= 0) arr.splice(i, 1); else arr.push(val);
-    // An okres with nothing ticked leaves no entry behind.
     if (GROUPS.every(g => !(r[g.key] || []).length)) delete s.data.districts[id];
-    s.data.updated = new Date().toISOString();
-    s.dirty = true;
-    try { localStorage.setItem(LS_DATA, JSON.stringify(s.data)); } catch (e) {}
-    render();
+    persist();
+  }
+
+  function toggleCell(id, d, t) {
+    const r = s.data.regions[id] || (s.data.regions[id] = {});
+    const arr = r.matrix || (r.matrix = []);
+    const k = cell(d, t);
+    const i = arr.indexOf(k);
+    if (i >= 0) arr.splice(i, 1); else arr.push(k);
+    if (!arr.length) delete s.data.regions[id];
+    persist();
   }
 
   function syncState() {
@@ -266,10 +436,12 @@
   }
 
   // ── data ───────────────────────────────────────────────────────────────────
+  const shape = o => ({ updated: o.updated || null, regions: o.regions || {}, districts: o.districts || {} });
+
   async function load() {
     let local = null;
     try { local = JSON.parse(localStorage.getItem(LS_DATA) || "null"); } catch (e) {}
-    if (local && local.districts) { s.data = local; render(); }
+    if (local && local.districts) { s.data = shape(local); render(); }
     let remote = null;
     try {
       const r = await fetch(DATA_PATH, { cache: "no-store" });
@@ -279,7 +451,7 @@
     if (remote && remote.districts) {
       const rt = Date.parse(remote.updated || 0) || 0;
       const lt = local ? (Date.parse(local.updated || 0) || 0) : -1;
-      if (rt >= lt) { s.data = remote; s.dirty = false; }
+      if (rt >= lt) { s.data = shape(remote); s.dirty = false; }
       else s.dirty = true;
     }
     render();
@@ -344,6 +516,9 @@
     a.click();
     URL.revokeObjectURL(a.href);
   };
+  document.querySelectorAll("#levels button").forEach(b => {
+    b.onclick = () => setLevel(b.dataset.level);
+  });
 
   // ── gate ───────────────────────────────────────────────────────────────────
   async function sha256(str) {

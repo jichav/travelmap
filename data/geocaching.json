@@ -1,4 +1,3110 @@
 {
-  "updated": null,
-  "districts": {}
+  "updated": "2026-08-21T14:01:13.989Z",
+  "regions": {},
+  "districts": {
+    "CZ-praha": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-benesov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-beroun": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-kladno": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-kolin": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-kutna-hora": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-melnik": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-mlada-boleslav": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "wherigo",
+        "virtual",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-nymburk": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-praha-vychod": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-praha-zapad": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-pribram": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-rakovnik": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-ceske-budejovice": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-cesky-krumlov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-jindrichuv-hradec": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-pisek": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-prachatice": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-strakonice": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-tabor": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-domazlice": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "earth",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-klatovy": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-plzen-jih": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-plzen-mesto": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-plzen-sever": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-rokycany": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-tachov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "virtual",
+        "event"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-cheb": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-karlovy-vary": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "wherigo",
+        "earth",
+        "virtual",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-sokolov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-decin": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "earth",
+        "virtual",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-chomutov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-litomerice": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-louny": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-most": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-teplice": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-usti-nad-labem": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "virtual",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-ceska-lipa": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-jablonec-nad-nisou": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-liberec": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-semily": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-hradec-kralove": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-jicin": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-nachod": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-rychnov-nad-kneznou": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-trutnov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-chrudim": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "earth",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-pardubice": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-svitavy": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-usti-nad-orlici": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-havlickuv-brod": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-jihlava": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-pelhrimov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-trebic": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-zdar-nad-sazavou": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-blansko": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-brno-mesto": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-brno-venkov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-breclav": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-hodonin": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-vyskov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-znojmo": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-jesenik": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "earth"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-olomouc": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-prostejov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-prerov": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-sumperk": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ]
+    },
+    "CZ-kromeriz": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-uherske-hradiste": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-vsetin": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-zlin": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-bruntal": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-frydek-mistek": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-karvina": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event",
+        "cito"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-novy-jicin": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "O"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-opava": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    },
+    "CZ-ostrava-mesto": {
+      "types": [
+        "trad",
+        "multi",
+        "mystery",
+        "letterbox",
+        "wherigo",
+        "earth",
+        "virtual",
+        "event"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "O",
+        "NCH"
+      ],
+      "terrain": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ],
+      "diff": [
+        "1",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5"
+      ]
+    }
+  }
 }

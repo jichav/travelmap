@@ -93,6 +93,21 @@
     });
   }
 
+  // Germany's ADM3 cuts four northern Länder finer than the Kreis level, so a Kreis can
+  // arrive as two features under one name. Same name = same unit: the pieces are folded
+  // into a single MultiPolygon, which brings the 428 features back to the official 401.
+  function mergeByName(feats) {
+    const polys = g => (g.type === "MultiPolygon" ? g.coordinates : [g.coordinates]);
+    const by = new Map();
+    feats.forEach(f => {
+      const key = f.properties.tmName.cs;
+      const hit = by.get(key);
+      if (!hit) { by.set(key, f); return; }
+      hit.geometry = { type: "MultiPolygon", coordinates: polys(hit.geometry).concat(polys(f.geometry)) };
+    });
+    return Array.from(by.values());
+  }
+
   // Slovakia and later neighbours: okres → kraj by testing the okres centroid against
   // the ADM1 polygons, with the nearest kraj as the fallback for a centroid that falls
   // just outside every one of them.
@@ -131,6 +146,7 @@
         if (country.nameStyle === "pl") nm = nm.replace(/^powiat\s+/i, "").replace(/^./, ch => ch.toUpperCase());
         f.properties.tmName = { cs: nm, en: nm };
       });
+      if (country.mergeDuplicates) a2.features = mergeByName(a2.features);
       adm1 = adm1Parents(a2.features, adm1, window[country.regionTable]);
     } else czParents(a2.features);
 

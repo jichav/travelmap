@@ -34,7 +34,8 @@ window.REGION_COUNTRIES = [
     id: "DE", iso3: "DEU", name: "Germany", nameCs: "Německo",
     of: { en: "of Germany", cs: "Německa" },
     flag: "https://flagcdn.com/de.svg", worldName: "Germany",
-    regions: 16, districts: 428, parents: "adm1", adm: "ADM3", nameStyle: "de", seatKey: "seatLand",
+    regions: 16, districts: 401, parents: "adm1", adm: "ADM3", nameStyle: "de", seatKey: "seatLand",
+    mergeDuplicates: true,
     regionTable: "DE_REGIONS", regionSeats: "DE_REGION_SEATS",
     view: { type: "transverseMercator", rotate: [-9, 0], label: "ETRS89 / UTM 32N \u00b7 EPSG:25832" }
   },
