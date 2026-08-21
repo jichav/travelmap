@@ -25,7 +25,7 @@
     <p>Samostatný přehled českých okresů. Heslo stránku jen skrývá – repozitář je veřejný.</p>
     <label class="field">
       <span>Heslo</span>
-      <input type="password" id="gatePw" placeholder="••••" autocomplete="off">
+      <input type="password" id="gatePw" placeholder="••••••••" autocomplete="off">
     </label>
     <p class="err" id="gateErr"></p>
     <div class="dlg-actions">
@@ -56,79 +56,46 @@
 </header>
 
 <div class="wrap">
-  <section class="intro">
-    <h1>Okresy v keších</h1>
-    <p>Co jsem v jednotlivých okresech našel: typy keší, velikosti, terén a obtížnost.
-      Záznam je oddělený od cestovní mapy a do jejích čísel se nepočítá.</p>
-  </section>
-
-  <section class="stats">
-    <div class="stat">
-      <div class="k">Okresy s keší</div>
-      <div class="v" id="cntDis">0<small> / 77</small></div>
-      <div class="bar-l"><span id="disBar" style="width:0%"></span></div>
+  <div class="mapcard">
+    <svg id="map" viewBox="0 0 1000 620" role="img" aria-label="Mapa krajů a okresů">
+      <rect id="mapGround" x="0" y="0" width="100%" height="100%"></rect>
+      <g id="gWorld"></g>
+      <g id="gUnits"></g>
+      <g id="gEdge"></g>
+      <g id="gLab"></g>
+      <g id="gScale"></g>
+    </svg>
+    <div class="caption" id="mapCaption">Načítám hranice…</div>
+    <div class="levels" id="levels">
+      <button type="button" data-level="regions" aria-pressed="false">Kraje</button>
+      <button type="button" data-level="districts" aria-pressed="true">Okresy</button>
     </div>
-    <div class="stat">
-      <div class="k">Typy</div>
-      <div class="v" id="cntType">0<small> / 8</small></div>
-      <div class="bar-l"><span id="typeBar" style="width:0%"></span></div>
-    </div>
-    <div class="stat">
-      <div class="k">Velikosti</div>
-      <div class="v" id="cntSize">0<small> / 5</small></div>
-      <div class="bar-l"><span id="sizeBar" style="width:0%"></span></div>
-    </div>
-    <div class="stat">
-      <div class="k">Kraje s keší</div>
-      <div class="v" id="cntReg">0<small> / 14</small></div>
-      <div class="bar-l"><span id="regBar" style="width:0%"></span></div>
-    </div>
-  </section>
-
-  <div class="board">
-    <div class="mapcard">
-      <svg id="map" viewBox="0 0 900 560" role="img" aria-label="Mapa okresů">
-        <rect id="mapGround" x="0" y="0" width="100%" height="100%"></rect>
-        <g id="gWorld"></g>
-        <g id="gUnits"></g>
-        <g id="gEdge"></g>
-        <g id="gSel"></g>
-        <g id="gScale"></g>
-      </svg>
-      <div class="caption" id="mapCaption">Česko</div>
-      <div class="projnote">ETRS89 / UTM 33N · EPSG:25833</div>
-    </div>
-
-    <aside>
-      <div class="panel" id="detailPanel">
-        <h3>Okres</h3>
-        <div class="name" id="dName">Vyber okres</div>
-        <div class="meta" id="dMeta">Klikni do mapy nebo do seznamu pod ní.</div>
-        <div id="groups"></div>
-      </div>
-
-      <div class="panel">
-        <h3>Legenda</h3>
-        <div class="hint" id="legend" style="margin-top:8px">
-          Sytost výplně roste s tím, kolik údajů okres má: nic, 1–3, 4–8, devět a více.
-        </div>
-      </div>
-
-      <div class="panel">
-        <h3>Data</h3>
-        <p class="hint" id="syncState" style="margin-top:8px">Načítám…</p>
-        <div class="datarow">
-          <button id="dlBtn">Stáhnout JSON</button>
-        </div>
-      </div>
-    </aside>
+    <div class="projnote">ETRS89 / UTM 33N · EPSG:25833</div>
   </div>
 
-  <div class="listhead">
-    <h2>Okresy po krajích</h2>
-    <div class="m" id="listCount"></div>
+  <section class="panel below">
+    <div class="phead">
+      <div>
+        <div class="name" id="aName">Vyber okres</div>
+        <div class="meta" id="aMeta">Klikni do mapy.</div>
+      </div>
+      <p class="hint">V mapě je u okresu napsáno jen to, co v něm chybí. Kraj drží matrix 9 × 9.</p>
+    </div>
+    <div id="analysis"></div>
+  </section>
+
+  <section class="totals">
+    <div class="listhead">
+      <h2>Celkem za všechny okresy</h2>
+      <p class="hint">V kolika okresech mám každou položku.</p>
+    </div>
+    <div class="tgrid" id="totals"></div>
+  </section>
+
+  <div class="datarow">
+    <p class="hint" id="syncState">Načítám…</p>
+    <button id="dlBtn">Stáhnout JSON</button>
   </div>
-  <div id="lists"></div>
 
   <footer>
     <div class="foot">
